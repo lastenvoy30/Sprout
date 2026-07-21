@@ -18,13 +18,14 @@ enum Frequency {
 }
 
 model User {
-  id String  @id @default(cuid())
-  name String
-  email String @unique
-  password String
-  createdAt DateTime @default(now())
+  id            String            @id @default(cuid())
+  name          String
+  email         String            @unique
+  password      String
+  createdAt     DateTime          @default(now())
   habits        Habit[]
-}  
+  checkIns      CheckIn[]
+}
 
 model Habit {
   id          String    @id @default(cuid())
@@ -37,5 +38,21 @@ model Habit {
   createdAt   DateTime  @default(now())
   userId      String
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  checkIns    CheckIn[]
+
   @@index([userId])
+}
+
+model CheckIn {
+  id        String   @id @default(cuid())
+  date      DateTime // normalized to midnight UTC for the day being checked off
+  note      String?
+  createdAt DateTime @default(now())
+  habitId   String
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([habitId, date])
+  @@index([userId, date])
 }
