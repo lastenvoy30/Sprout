@@ -29,8 +29,8 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-green-100 px-6">
-      <div className="w-full max-w-sm">
+<main className="min-h-screen flex items-center justify-center px-6">
+        <div className="w-full max-w-sm">
         <h1 className="font-display italic text-3xl mb-2">Welcome back</h1>
         <p className="text-ink/60 text-sm mb-8">Sign in to keep your streak alive.</p>
 

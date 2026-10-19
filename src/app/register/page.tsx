@@ -43,8 +43,8 @@ export default function RegisterPage() {
 
   }
   return (
-        <main className="min-h-screen flex items-center justify-center bg-green-100 px-6">
-      <div className="w-full max-w-sm">
+<main className="min-h-screen flex items-center justify-center px-6">
+        <div className="w-full max-w-sm">
         <h1 className="font-display italic text-3xl mb-2">Plant your first habit</h1>
         <p className="text-ink/60 text-sm mb-8">It takes about thirty seconds.</p>
 

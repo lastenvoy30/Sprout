@@ -33,3 +33,9 @@
       focus:border-moss outline-none transition-colors;
   }
 }
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+}

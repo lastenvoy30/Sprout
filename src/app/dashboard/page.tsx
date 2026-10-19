@@ -53,10 +53,10 @@ useEffect(() => {
 }
 
   async function handleDelete(habitId: string) {
-    if (!confirm("Delete this habit? This can't be undone.")) return;
-    const res = await fetch(`/api/habits/${habitId}`, { method: "DELETE" });
-    if (res.ok) loadData();
-  }
+  if (!confirm("Delete this habit? This can't be undone.")) return;
+  const res = await fetch(`/api/habits/${habitId}`, { method: "DELETE" });
+  if (res.ok) await loadData();
+}
 
   async function handleCreateGroup(e: React.FormEvent) {
     e.preventDefault();
