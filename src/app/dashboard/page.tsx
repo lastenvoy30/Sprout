@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar";
 import HabitCard from "@/components/HabitCard";
 import NewHabitForm from "@/components/NewHabitForm";
 import type { Habit, Group } from "@/types/models";
+import { toDateString } from "@/lib/streaks";
 
 export default function DashboardPage() {
   const { status } = useSession();
@@ -43,9 +44,13 @@ useEffect(() => {
 }, [status, router, loadData]);
 
   async function handleToggle(habitId: string) {
-    const res = await fetch(`/api/habits/${habitId}/checkin`, { method: "POST" });
-    if (res.ok) loadData();
-  }
+  const res = await fetch(`/api/habits/${habitId}/checkin`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ date: toDateString(new Date()) }),
+  });
+  if (res.ok) await loadData();
+}
 
   async function handleDelete(habitId: string) {
     if (!confirm("Delete this habit? This can't be undone.")) return;
