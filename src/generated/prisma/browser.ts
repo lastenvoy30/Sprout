@@ -32,3 +32,13 @@ export type Habit = Prisma.HabitModel
  * 
  */
 export type CheckIn = Prisma.CheckInModel
+/**
+ * Model Group
+ * 
+ */
+export type Group = Prisma.GroupModel
+/**
+ * Model GroupMembership
+ * 
+ */
+export type GroupMembership = Prisma.GroupMembershipModel

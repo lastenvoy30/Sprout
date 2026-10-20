@@ -25,6 +25,7 @@ model User {
   createdAt     DateTime          @default(now())
   habits        Habit[]
   checkIns      CheckIn[]
+  memberships GroupMembership[]
 }
 
 model Habit {
@@ -55,4 +56,24 @@ model CheckIn {
 
   @@unique([habitId, date])
   @@index([userId, date])
+}
+
+model Group {
+  id          String            @id @default(cuid())
+  name        String
+  inviteCode  String            @unique
+  createdAt   DateTime          @default(now())
+  memberships GroupMembership[]
+}
+
+model GroupMembership {
+  id       String   @id @default(cuid())
+  joinedAt DateTime @default(now())
+  groupId  String
+  group    Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@index([userId])
 }

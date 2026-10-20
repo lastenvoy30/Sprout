@@ -38,3 +38,16 @@ export interface FeedItem {
   user: { id: string; name: string };
   kudos: { id: string; emoji: string; from: { id: string; name: string } }[];
 }
+
+export interface GroupMember {
+  id: string;
+  userId: string;
+  user: { id: string; name: string };
+}
+
+export interface Group {
+  id: string;
+  name: string;
+  inviteCode: string;
+  memberships: GroupMember[];
+}

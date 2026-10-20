@@ -11,4 +11,6 @@
 export type * from './models/User'
 export type * from './models/Habit'
 export type * from './models/CheckIn'
+export type * from './models/Group'
+export type * from './models/GroupMembership'
 export type * from './commonInputTypes'

@@ -53,7 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Habit: 'Habit',
-  CheckIn: 'CheckIn'
+  CheckIn: 'CheckIn',
+  Group: 'Group',
+  GroupMembership: 'GroupMembership'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -108,6 +110,26 @@ export const CheckInScalarFieldEnum = {
 } as const
 
 export type CheckInScalarFieldEnum = (typeof CheckInScalarFieldEnum)[keyof typeof CheckInScalarFieldEnum]
+
+
+export const GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  inviteCode: 'inviteCode',
+  createdAt: 'createdAt'
+} as const
+
+export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
+
+
+export const GroupMembershipScalarFieldEnum = {
+  id: 'id',
+  joinedAt: 'joinedAt',
+  groupId: 'groupId',
+  userId: 'userId'
+} as const
+
+export type GroupMembershipScalarFieldEnum = (typeof GroupMembershipScalarFieldEnum)[keyof typeof GroupMembershipScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -59,21 +59,24 @@ useEffect(() => {
 }
 
   async function handleCreateGroup(e: React.FormEvent) {
-    e.preventDefault();
-    setGroupError("");
-    if (!newGroupName.trim()) return;
-    const res = await fetch("/api/groups", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: newGroupName }),
-    });
-    if (res.ok) {
-      setNewGroupName("");
-      loadData();
-    } else {
-      setGroupError((await res.json()).error);
-    }
+  e.preventDefault();
+  console.log("create group clicked, name =", newGroupName);
+  // ...rest unchanged
+  setGroupError("");
+  if (!newGroupName.trim()) return;
+  const res = await fetch("/api/groups", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: newGroupName }),
+  });
+  if (res.ok) {
+    setNewGroupName("");
+    await loadData();
+  } else {
+    const data = await res.json().catch(() => ({}));
+    setGroupError(data.error || "Couldn't create the group.");
   }
+}
 
   async function handleJoinGroup(e: React.FormEvent) {
     e.preventDefault();
@@ -169,26 +172,26 @@ useEffect(() => {
           </div>
 
           <form onSubmit={handleCreateGroup} className="card p-4 space-y-2">
-            <label className="text-sm font-medium block">Start a group</label>
-            <input
-              className="input"
-              placeholder="Group name"
-              value={newGroupName}
-              onChange={(e) => setNewGroupName(e.target.value)}
-            />
-            <button type="submit" className="btn-secondary w-full">
-              Create group
-            </button>
-          </form>
+  <label className="text-sm font-medium block">Start a group</label>
+  <input
+  className="input"
+  placeholder="Group name"
+  value={newGroupName}
+  onChange={(e) => setNewGroupName(e.target.value)}
+/>
+  <button type="submit" className="btn-secondary w-full">
+    Create group
+  </button>
+</form>
 
           <form onSubmit={handleJoinGroup} className="card p-4 space-y-2">
             <label className="text-sm font-medium block">Join with a code</label>
             <input
-              className="input uppercase"
-              placeholder="INVITE CODE"
-              value={joinCode}
-              onChange={(e) => setJoinCode(e.target.value)}
-            />
+  className="input uppercase"
+  placeholder="INVITE CODE"
+  value={joinCode}
+  onChange={(e) => setJoinCode(e.target.value)}
+/>
             <button type="submit" className="btn-secondary w-full">
               Join group
             </button>
